@@ -35,10 +35,9 @@ jobs:
         with:
           path: src
       - name: Set up & MSYS2
-        uses: ./
+        uses: MSP-Greg/setup-ruby-pkgs@v1
         with:
-          mingw: _upgrade_ gdbm gmp libffi libyaml openssl ragel readline
-          msys2: automake1.16 bison
+          mingw: _upgrade_ openssl readline gcc
       - name: where check
         run: |
           # show where

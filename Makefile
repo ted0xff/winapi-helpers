@@ -4,7 +4,7 @@ TARGET_LIB=winapi
 
 
 
-INSTALL_PATH=/media/sf_share/
+DESTDIR ?=/media/sf_share/
 
 # Use of pattern rule : "%.x : %.y" generic
 
@@ -21,7 +21,7 @@ obj/%.o: src/%.c  | bin obj
 	$(CROSS)gcc -c $< -Wall -Wextra -O2  -o $@ -I inc
 
 install: all
-	cp bin/time_measure.exe bin/test_serial.exe $(INSTALL_PATH)
+	cp bin/time_measure.exe bin/test_serial.exe $(DESTDIR)/
 
 # create folder if needed
 obj:

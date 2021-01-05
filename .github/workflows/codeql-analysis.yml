@@ -35,7 +35,7 @@ jobs:
         with:
           path: src
       - name: Set up & MSYS2
-        uses: MSP-Greg/setup-ruby-pkgs@v1
+        #uses: MSP-Greg/setup-ruby-pkgs@v1
         with:
           mingw: _upgrade_ gdbm gmp libffi libyaml openssl ragel readline
           msys2: automake1.16 bison
@@ -43,7 +43,7 @@ jobs:
         run: |
           # show where
           Write-Host
-          $where = 'gcc.exe', 'ragel.exe', 'make.exe', 'bison.exe', 'libcrypto-1_1-x64.dll', 'libssl-1_1-x64.dll'
+          $where = 'gcc.exe', 'ragel.exe', 'make.exe', 'libcrypto-1_1-x64.dll', 'libssl-1_1-x64.dll'
           foreach ($e in $where) {
             $rslt = where.exe $e 2>&1 | Out-String
             if ($rslt.contains($e)) { Write-Host $rslt }
@@ -60,7 +60,7 @@ jobs:
           $PSDefaultParameterValues['*:Encoding'] = 'utf8'
           [Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding("IBM437")
           [Console]::InputEncoding  = [System.Text.Encoding]::GetEncoding("IBM437")
-          make DESTDIR=.. install-nodoc
+          make DESTDIR=.. install
 
       - name: test
         timeout-minutes: 5

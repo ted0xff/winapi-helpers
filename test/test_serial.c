@@ -11,6 +11,14 @@ int main(int argc, char *argv[]) {
 
     printf("Version : %s %s\n", __DATE__, __TIME__);
 
+    printf("\nList all found serial ports:\n");
+    for (int i = 1; i < 255; ++i){
+        if (serial_exist( i)) {
+            printf( " COM%d exists\n", i);
+        }
+    }
+    
+    
     if(argc == 1) {
         strncpy(serialPort,"\\\\.\\COM1", 32);
     } else {

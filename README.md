@@ -1,7 +1,7 @@
 # winapi-helpers
 Helper library to build Windows program (only) 
 
-Library for Windows only developpement
+Library for Windows only developement
 ==================================
 
 Collection of basic helpers to do some program for Windows only compatibility.

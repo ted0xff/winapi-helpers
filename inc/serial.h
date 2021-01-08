@@ -3,6 +3,16 @@
 
 #include<windows.h>
 
+/**
+ * @brief serial_exists
+ *
+ * Check if a serial port exist
+ *
+ * @param[in] port number of port: 7 for "COM7"
+ *
+ * @return TRUE if serial port found, FALSE when not found
+*/
+BOOL serial_exist( int port);
 
 /**
  * @brief serial_open

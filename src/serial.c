@@ -4,6 +4,43 @@
 
 #include"serial.h"
 
+BOOL serial_exist( int port) {
+    HANDLE hComm;
+    char buffer[16];
+    BOOL ret;
+
+    if (! (1 <= port && port <= 255)) {
+        return FALSE;
+    }
+
+    snprintf( buffer, sizeof(buffer), "\\\\.\\COM%d", port);
+
+    hComm = CreateFileA(buffer,                //port name
+                        GENERIC_READ | GENERIC_WRITE, //Read/Write
+                        0,                            // No Sharing
+                        NULL,                         // No Security
+                        OPEN_EXISTING,// Open existing port only
+                        0,            // Non Overlapped I/O
+                        NULL);        // Null for Comm Devices
+
+    if (hComm == INVALID_HANDLE_VALUE) {
+        //printf("Error in opening serial port");
+        ret = FALSE;
+        if( ERROR_SHARING_VIOLATION == GetLastError()) {
+            // ne peut pas ouvrir car déjà ouvert, donc le port existe
+            printf(" COM%d already in use!\n", port);
+            ret = TRUE;
+        }
+    }else{
+        //printf("opening serial port successful");
+        ret = TRUE;
+    }
+
+
+    CloseHandle(hComm);//Closing the Serial Port
+    return ret;
+}
+
 HANDLE serial_open( char *serialPort){
     HANDLE hComm;
 
